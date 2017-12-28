@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Face Recognizer - By GudarJs</title>
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/lib/dropzone.css') }}">		
+        
+		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/screen.css') }}">
+	</head>
+	<body class="blue-grey lighten-5" onload="vm.onLoad();">
+		<ul id="camera_list" class="dropdown-content">
+		</ul>
+		<nav>
+			<div class="nav-wrapper blue darken-1">
+				<a href="" class="brand-logo center">Face Recognizer</a>
+			</div>
+        </nav>
+        
+		<main class="container z-depth-1">
+            {% block content %}{% endblock %}
+        </main>
+        
+		<footer class="page-footer blue darken-1">
+			<div class="footer-copyright">
+				<div class="container">
+					<a class="grey-text text-lighten-4 right" href="https://github.com/gudarjs"><i class="fab fa-github"></i> Github GudarJs © 2017</a>
+				</div>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+		<script src="{{ url_for('static', filename='javascripts/vendor/dropzone.js') }}"></script>		
+		<script src="{{ url_for('static', filename='javascripts/main.js') }}"></script>
+	</body>
+</html>

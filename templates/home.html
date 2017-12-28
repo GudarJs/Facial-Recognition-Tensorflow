@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col s2">
+            <form id="image-uploader" class="dropzone" method="post" action="/recognize/faces" enctype="multipart/form-data">
+                <div class="fallback">
+                    <input name="file" type="file" />
+                </div>
+            </form>
+        </div>
+        <div class="col s10">
+            <div class="row">
+                <div class="col s12" style="text-align: center;">
+                    <img id="result-image">
+                </div>        
+            </div>
+            <div class="row">
+                <div class="col s12" style="display: flex;justify-content: center;">
+                    <table id="result-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>404 - faces not found.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>        
+            </div>
+        </div>
+    </div>
+{% endblock %}

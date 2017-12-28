@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 1rem;
+    background-color: #fefefe;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    margin-bottom: 1rem;
+}
+
+footer {
+    margin-top: 1rem; 
+}
+
+.hide {
+    visibility: hidden;
+}
+
+#result-image {
+    max-width: 500px;
+}
+
+/* Upload file */
+
+.dropzone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}

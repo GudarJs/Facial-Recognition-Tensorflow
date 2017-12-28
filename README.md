@@ -1,1 +1,1 @@
-# Meetup-Facial-Recognition
+# Meetup Facial Recognition
