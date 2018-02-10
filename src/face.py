@@ -17,6 +17,7 @@ debug = False
 class Face:
     def __init__(self):
         self.name = None
+        self.confidence = None
         self.bounding_box = None
         self.landmarks = None
         self.image = None
@@ -46,7 +47,7 @@ class Recognition:
             if debug:
                 cv2.imshow("Face: " + str(i), face.image)
             face.embedding = self.encoder.generate_embedding(face)
-            face.name = self.identifier.identify(face)
+            face.name, face.confidence = self.identifier.identify(face)
 
         return faces
 
@@ -59,8 +60,11 @@ class Identifier:
     def identify(self, face):
         if face.embedding is not None:
             predictions = self.model.predict_proba([face.embedding])
-            best_class_indices = np.argmax(predictions, axis=1)
-            return self.class_names[best_class_indices[0]]
+            best_prediction = np.max(predictions, axis=1)
+            if best_prediction[0] > 0.6:
+                best_class_indices = np.argmax(predictions, axis=1)
+                return self.class_names[best_class_indices[0]], best_prediction[0]
+            return 'Unknown', 0
 
 
 class Encoder:

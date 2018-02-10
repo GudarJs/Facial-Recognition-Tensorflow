@@ -10,7 +10,8 @@ def add_overlays(image, faces):
         cv2.rectangle(image,
                         (face_bb[0], face_bb[1]), (face_bb[2], face_bb[3]),
                         (0, 255, 0), 2)
-        if face.name is not None:
+                        
+        if face.name != 'Unknown':
             cv2.putText(image, face.name, (face_bb[0], face_bb[3]),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0),
                         thickness=2, lineType=2)
@@ -18,7 +19,10 @@ def add_overlays(image, faces):
             cv2.putText(image, 'Unknown', (face_bb[0], face_bb[3]),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),
                         thickness=2, lineType=2)
-        faces[i] = face.name
+        faces[i] = {
+            'name': face.name,
+            'confidence': face.confidence
+        }
 
 def decode_image(encoded_image):
     in_memory_file = io.BytesIO()
