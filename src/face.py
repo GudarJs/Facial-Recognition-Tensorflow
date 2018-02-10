@@ -55,7 +55,7 @@ class Recognition:
 class Identifier:
     def __init__(self):
         with open(classifier_model, 'rb') as infile:
-            self.model, self.class_names = pickle.load(infile)
+            self.model, self.class_names = pickle.load(infile, encoding='')
 
     def identify(self, face):
         if face.embedding is not None:

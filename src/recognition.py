@@ -36,6 +36,6 @@ def recognize_faces(encoded_image, face_recognition):
 
     add_overlays(image, faces)
     _, image_buffer = cv2.imencode('.jpg', image)
-    image = base64.b64encode(image_buffer)
+    image = base64.b64encode(image_buffer).decode("utf-8")
 
     return image, faces

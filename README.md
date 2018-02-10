@@ -2,7 +2,7 @@
 
 ![GudarJS Pycon Profile](images/profile.jpg)
 
-Tensorflow pipeline to recognize faces.
+Tensorflow pipeline to recognize faces for python 3.6.
 
 ## 1. Installing Dependencies
 
