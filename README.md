@@ -4,6 +4,10 @@
 
 Tensorflow pipeline to recognize faces for python 3.6.
 
+## Slides
+
+[Google Slides](https://drive.google.com/open?id=1tC4elGmYVWl5gb0HoG0Wlw3AFgD6Iy00f-PAvHrEXEw)
+
 ## 1. Installing Dependencies
 
 ### FaceNet
@@ -69,6 +73,14 @@ Run the following command.
 
 ``` bash
 python ~/<facenet_path>/src/classifier.py TRAIN ~/<repo_path>/datasets ~/<repo_path>/20170512-110547/20170512-110547.pb ~/<repo_path>/classifier/face_classifier.pkl --batch_size 1000 --min_nrof_images_per_class 40 --nrof_train_images_per_class 40
+```
+
+## 7. Start the webserver
+
+Run the following command.
+
+``` bash
+python server.py
 ```
 
 * Replace **<facenet_path>** with the facenet installation folder.
