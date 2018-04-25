@@ -11,7 +11,7 @@ from sklearn.svm import SVC
 
 scale = 1
 dataset_path = 'datasets'
-name = raw_input('Please enter a name: ')
+name = input('Please enter a name: ')
 path = dataset_path + '/' + name
 classifier_filename = 'classifier/face_classifier.pkl'
 face_encoder = Encoder()
@@ -34,13 +34,13 @@ def verify_detection(face_bb, face_landmarks, margin=5):
     # Check nose position
     if (face_landmarks[2] >= nose_center - margin and face_landmarks[2] <= nose_center + margin):
         counter += 1
-    
+
     if (counter == 2):
         return True
     else:
         return False
 
-def add_overlays(frame, face, face_bb, face_landmarks, frame_rate):
+def add_overlays(frame, face, face_bb, face_landmarks, frame_rate, images_saved):
     if face is not None:
         if face.image is not None:
             cv2.imshow('face', face.image)
@@ -52,8 +52,8 @@ def add_overlays(frame, face, face_bb, face_landmarks, frame_rate):
 
         # Draw landmarks
         for i in range(0, 3):
-            cv2.circle(frame, (int(face_landmarks[i]) * scale, int(face_landmarks[i+5]) * scale), 5, (255,0,0), -1)
-    
+            cv2.circle(frame, (int(face_landmarks[i] * scale), int(face_landmarks[i+5] * scale)), 5, (255,0,0), -1)
+
     if face_bb is not None:
         # Draw nose line
         nose_center = (int(face_bb[0] + (face_bb[2] / 2))) * scale
@@ -69,6 +69,12 @@ def add_overlays(frame, face, face_bb, face_landmarks, frame_rate):
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),
                 thickness=2, lineType=2)
 
+    textsize = cv2.getTextSize(str(images_saved), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)[0]
+    # Draw number of images saved
+    cv2.putText(frame, str(images_saved), ((frame.shape[1] - textsize[0]) - 10, 30),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0),
+                thickness=2, lineType=2)
+
 def main():
     frame_interval = 5  # Number of frames after which to run face detection
     fps_display_interval = 0  # seconds
@@ -76,7 +82,7 @@ def main():
     frame_count = 0
     images_saved = 0
 
-    video_capture = cv2.VideoCapture(1)
+    video_capture = cv2.VideoCapture(0)
     face_detection = Detection()
     start_time = time.time()
 
@@ -88,10 +94,11 @@ def main():
         # Read frame from camera
         ok, frame = video_capture.read()
         if not ok:
+            print('No data frame...')
             break
 
         if (frame_count % frame_interval) == 0:
-            faces = face_detection.find_faces(cv2.resize(frame, (frame.shape[1] / scale, frame.shape[0] / scale)))
+            faces = face_detection.find_faces(cv2.resize(frame, (int(frame.shape[1] / scale), int(frame.shape[0] / scale))))
 
             # Check our current fps
             end_time = time.time()
@@ -106,19 +113,18 @@ def main():
             face_landmarks = faces[0].landmarks
             face_bb = faces[0].bounding_box
             face_bb = (face_bb[0], face_bb[1], face_bb[2] - face_bb[0], face_bb[3] - face_bb[1])
-            add_overlays(frame, faces[0], face_bb, face_landmarks, frame_rate)
+            add_overlays(frame, faces[0], face_bb, face_landmarks, frame_rate, images_saved)
 
             if (verify_detection(face_bb, face_landmarks)):
                 images_saved += 1
                 save_image(faces[0].image, images_saved)
         else:
-            add_overlays(frame, None, None, None, frame_rate)
+            add_overlays(frame, None, None, None, frame_rate, images_saved)
 
         frame_count += 1
         cv2.imshow('Video', frame)
 
         if (images_saved == 50):
-            train_classifier();
             break
 
         # Press 'q' to exit
@@ -127,3 +133,7 @@ def main():
 
     video_capture.release()
     cv2.destroyAllWindows()
+
+
+
+
