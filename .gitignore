@@ -107,3 +107,6 @@ classifier
 !classifier/.gitkeep
 models
 !models/.gitkeep
+
+**.*.swp
+output.jpg
