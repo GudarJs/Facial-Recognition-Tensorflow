@@ -75,6 +75,9 @@ Run the following command.
 python ~/<facenet_path>/src/classifier.py TRAIN ~/<repo_path>/datasets ~/<repo_path>/models/20170512-110547/20170512-110547.pb ~/<repo_path>/classifier/face_classifier.pkl --batch_size 1000 --min_nrof_images_per_class 40 --nrof_train_images_per_class 40
 ```
 
+* Replace **<facenet_path>** with the facenet installation folder.
+* Replace **<repo_path>** with this repository installation folder.
+
 ## 7. Start the webserver
 
 Run the following command.
@@ -82,9 +85,6 @@ Run the following command.
 ``` bash
 python server.py
 ```
-
-* Replace **<facenet_path>** with the facenet installation folder.
-* Replace **<repo_path>** with this repository installation folder.
 
 ## Credits
 
