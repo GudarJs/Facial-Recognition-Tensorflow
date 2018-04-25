@@ -37,3 +37,12 @@ footer {
     align-items: center;
     flex: 1;
 }
+
+.dz-preview {
+    display: none !important;
+}
+
+.dz-preview:last-child {
+    display: block !important;
+}
+
