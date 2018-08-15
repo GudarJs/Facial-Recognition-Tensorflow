@@ -1,7 +1,7 @@
 Flask==0.12.2
 opencv-python==3.4.0.12
 numpy==1.14.0
-tensorflow==1.2.0
+tensorflow==1.7.0
 scipy==1.0.0
 sklearn==0.0
 Pillow==4.3.0
